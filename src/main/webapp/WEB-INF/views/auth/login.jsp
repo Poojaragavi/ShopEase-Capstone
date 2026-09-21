@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Login — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -14,11 +17,11 @@
         </c:if>
 
         <form action="${pageContext.request.contextPath}/login" method="post">
-            <input type="hidden" name="redirect" value="<c:out value='${param.redirect}'/>">
+            <input type="hidden" name="redirect" value="${fn:escapeXml(param.redirect)}">
 
             <div class="form-group">
                 <label class="form-label" for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="<c:out value='${email != null ? email : param.email}'/>" required class="form-control" placeholder="name@example.com">
+                <input type="email" id="email" name="email" value="${fn:escapeXml(email != null ? email : param.email)}" required class="form-control" placeholder="name@example.com">
             </div>
 
             <div class="form-group">

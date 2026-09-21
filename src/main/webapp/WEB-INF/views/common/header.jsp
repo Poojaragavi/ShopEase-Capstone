@@ -27,7 +27,7 @@
 
             <div class="search-bar">
                 <form action="${pageContext.request.contextPath}/products" method="get" class="search-form">
-                    <input type="text" name="q" value="<c:out value='${param.q}'/>" placeholder="Search groceries, perfumes, snacks, beauty..." class="search-input">
+                    <input type="text" name="q" value="${fn:escapeXml(param.q)}" placeholder="Search groceries, perfumes, snacks, beauty..." class="search-input">
                     <button type="submit" class="search-btn">Search</button>
                 </form>
             </div>

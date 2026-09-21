@@ -34,4 +34,14 @@
         <error-code>500</error-code>
         <location>/WEB-INF/views/error/500.jsp</location>
     </error-page>
+
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+            <el-ignored>false</el-ignored>
+            <scripting-invalid>false</scripting-invalid>
+            <include-prelude>/WEB-INF/views/common/taglibs.jspf</include-prelude>
+        </jsp-property-group>
+    </jsp-config>
 </web-app>

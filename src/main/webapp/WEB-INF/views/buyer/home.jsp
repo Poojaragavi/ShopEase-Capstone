@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="ShopEase — Fresh Groceries, Supermarket & Lifestyle" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -76,7 +77,7 @@
             <c:forEach var="p" items="${discountedProducts}">
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="<c:out value='${p.imageUrl}'/>" alt="<c:out value='${p.name}'/>" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                        <img src="${fn:escapeXml(p.imageUrl)}" alt="${fn:escapeXml(p.name)}" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                         <c:if test="${p.discountPercentage > 0}">
                             <span class="discount-tag"><c:out value="${p.discountPercentage}"/>% OFF</span>
                         </c:if>
@@ -126,7 +127,7 @@
         <c:forEach var="p" items="${featuredProducts}">
             <div class="product-card">
                 <div class="product-image-container">
-                    <img src="<c:out value='${p.imageUrl}'/>" alt="<c:out value='${p.name}'/>" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                    <img src="${fn:escapeXml(p.imageUrl)}" alt="${fn:escapeXml(p.name)}" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                     <c:if test="${p.discountPercentage > 0}">
                         <span class="discount-tag"><c:out value="${p.discountPercentage}"/>% OFF</span>
                     </c:if>

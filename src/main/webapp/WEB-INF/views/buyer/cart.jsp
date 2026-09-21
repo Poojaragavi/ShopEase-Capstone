@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Shopping Cart — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -35,7 +36,7 @@
                                 <div style="display: flex; flex-direction: column; gap: 20px;">
                                     <c:forEach var="item" items="${cart.items}">
                                         <div style="display: flex; gap: 16px; border-bottom: 1px solid var(--gray-200); padding-bottom: 16px; align-items: center;">
-                                            <img src="<c:out value='${item.productImageUrl}'/>" alt="<c:out value='${item.productName}'/>" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius);" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                                            <img src="${fn:escapeXml(item.productImageUrl)}" alt="${fn:escapeXml(item.productName)}" style="width: 80px; height: 80px; object-fit: cover; border-radius: var(--radius);" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
 
                                             <div style="flex: 1;">
                                                 <span class="product-cat" style="font-size: 11px;"><c:out value="${item.category}"/></span>
@@ -83,7 +84,7 @@
                             <div style="display: flex; flex-direction: column; gap: 16px;">
                                 <c:forEach var="saved" items="${cart.savedForLaterItems}">
                                     <div style="display: flex; gap: 16px; border-bottom: 1px solid var(--gray-200); padding-bottom: 14px; align-items: center;">
-                                        <img src="<c:out value='${saved.productImageUrl}'/>" alt="<c:out value='${saved.productName}'/>" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius);">
+                                        <img src="${fn:escapeXml(saved.productImageUrl)}" alt="${fn:escapeXml(saved.productName)}" style="width: 60px; height: 60px; object-fit: cover; border-radius: var(--radius);">
 
                                         <div style="flex: 1;">
                                             <h4 style="font-size: 15px;"><c:out value="${saved.productName}"/></h4>

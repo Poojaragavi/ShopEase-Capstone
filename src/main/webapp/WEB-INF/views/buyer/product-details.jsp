@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="${product.name} — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -15,7 +16,7 @@
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 40px;">
             <!-- Product Image -->
             <div style="background: #f3f4f6; border-radius: var(--radius); overflow: hidden; height: 380px; display: flex; align-items: center; justify-content: center; position: relative;">
-                <img src="<c:out value='${product.imageUrl}'/>" alt="<c:out value='${product.name}'/>" style="max-height: 100%; max-width: 100%; object-fit: contain;" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                <img src="${fn:escapeXml(product.imageUrl)}" alt="${fn:escapeXml(product.name)}" style="max-height: 100%; max-width: 100%; object-fit: contain;" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                 <c:if test="${product.discountPercentage > 0}">
                     <span class="discount-tag" style="font-size: 14px; padding: 4px 12px;"><c:out value="${product.discountPercentage}"/>% OFF</span>
                 </c:if>
@@ -121,7 +122,7 @@
             <c:forEach var="rp" items="${relatedProducts}">
                 <div class="product-card">
                     <div class="product-image-container">
-                        <img src="<c:out value='${rp.imageUrl}'/>" alt="<c:out value='${rp.name}'/>" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                        <img src="${fn:escapeXml(rp.imageUrl)}" alt="${fn:escapeXml(rp.name)}" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                     </div>
                     <div class="product-body">
                         <a href="${pageContext.request.contextPath}/product?id=${rp.id}" class="product-title"><c:out value="${rp.name}"/></a>

@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Product Catalog — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -19,14 +20,14 @@
     <div class="card" style="padding: 16px; margin-bottom: 24px;">
         <form action="${pageContext.request.contextPath}/products" method="get" style="display: flex; gap: 16px; align-items: center; flex-wrap: wrap;">
             <div style="flex: 2; min-width: 200px;">
-                <input type="text" name="q" value="<c:out value='${keyword}'/>" class="form-control" placeholder="Search product name or keyword...">
+                <input type="text" name="q" value="${fn:escapeXml(keyword)}" class="form-control" placeholder="Search product name or keyword...">
             </div>
 
             <div style="flex: 1; min-width: 150px;">
                 <select name="category" class="form-control">
                     <option value="all" ${selectedCategory == 'all' ? 'selected' : ''}>All Categories</option>
                     <c:forEach var="cat" items="${categories}">
-                        <option value="<c:out value='${cat}'/>" ${selectedCategory == cat ? 'selected' : ''}><c:out value="${cat}"/></option>
+                        <option value="${fn:escapeXml(cat)}" ${selectedCategory == cat ? 'selected' : ''}><c:out value="${cat}"/></option>
                     </c:forEach>
                 </select>
             </div>
@@ -63,7 +64,7 @@
                 <c:forEach var="p" items="${products}">
                     <div class="product-card">
                         <div class="product-image-container">
-                            <img src="<c:out value='${p.imageUrl}'/>" alt="<c:out value='${p.name}'/>" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                            <img src="${fn:escapeXml(p.imageUrl)}" alt="${fn:escapeXml(p.name)}" class="product-image" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                             <c:if test="${p.discountPercentage > 0}">
                                 <span class="discount-tag"><c:out value="${p.discountPercentage}"/>% OFF</span>
                             </c:if>

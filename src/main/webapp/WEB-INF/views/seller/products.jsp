@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Seller Products — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -43,7 +44,7 @@
                         <tr>
                             <td>
                                 <div style="display: flex; align-items: center; gap: 10px;">
-                                    <img src="<c:out value='${p.imageUrl}'/>" style="width: 45px; height: 45px; object-fit: cover; border-radius: 6px;" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
+                                    <img src="${fn:escapeXml(p.imageUrl)}" style="width: 45px; height: 45px; object-fit: cover; border-radius: 6px;" onerror="this.src='https://images.unsplash.com/photo-1542838132-92c53300491e?w=500';">
                                     <div>
                                         <strong><c:out value="${p.name}"/></strong>
                                         <div style="font-size: 11px; color: var(--gray-500);">ID: #${p.id}</div>
@@ -73,7 +74,7 @@
                             </td>
                             <td>
                                 <div style="display: flex; gap: 6px;">
-                                    <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;" onclick='openEditModal(${p.id}, "<c:out value="${p.name}"/>", "<c:out value="${p.description}"/>", "<c:out value="${p.category}"/>", ${p.price}, "${p.originalPrice}", ${p.stockQty}, "<c:out value="${p.imageUrl}"/>")'>Edit</button>
+                                    <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 12px;" onclick='openEditModal(${p.id}, "${fn:escapeXml(p.name)}", "${fn:escapeXml(p.description)}", "${fn:escapeXml(p.category)}", ${p.price}, "${p.originalPrice}", ${p.stockQty}, "${fn:escapeXml(p.imageUrl)}")'>Edit</button>
                                     <a href="${pageContext.request.contextPath}/seller/product/delete?id=${p.id}" class="btn btn-danger" style="padding: 4px 8px; font-size: 12px;" onclick="return confirm('Are you sure you want to delete this product listing?')">Delete</a>
                                 </div>
                             </td>

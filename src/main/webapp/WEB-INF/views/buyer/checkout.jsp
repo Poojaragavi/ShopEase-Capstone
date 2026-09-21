@@ -1,5 +1,6 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Checkout — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -18,28 +19,28 @@
             <form action="${pageContext.request.contextPath}/checkout" method="post" id="checkoutForm">
                 <div class="form-group">
                     <label class="form-label" for="customerName">Full Name</label>
-                    <input type="text" id="customerName" name="customerName" value="<c:out value='${customerName != null ? customerName : user.name}'/>" required class="form-control" placeholder="Recipient's Name">
+                    <input type="text" id="customerName" name="customerName" value="${fn:escapeXml(customerName != null ? customerName : user.name)}" required class="form-control" placeholder="Recipient's Name">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="phone">Phone Number (10 Digits)</label>
-                    <input type="tel" id="phone" name="phone" value="<c:out value='${phone != null ? phone : "9876543210"}'/>" required class="form-control" placeholder="e.g. 9876543210">
+                    <input type="tel" id="phone" name="phone" value="${fn:escapeXml(phone != null ? phone : '9876543210')}" required class="form-control" placeholder="e.g. 9876543210">
                 </div>
 
                 <div class="form-group">
                     <label class="form-label" for="address">Street Address / House No.</label>
-                    <input type="text" id="address" name="address" value="<c:out value='${address != null ? address : "Flat 402, Green Valley Apartments"}'/>" required class="form-control" placeholder="House No, Street, Landmark">
+                    <input type="text" id="address" name="address" value="${fn:escapeXml(address != null ? address : 'Flat 402, Green Valley Apartments')}" required class="form-control" placeholder="House No, Street, Landmark">
                 </div>
 
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
                     <div class="form-group">
                         <label class="form-label" for="city">City / District</label>
-                        <input type="text" id="city" name="city" value="<c:out value='${city != null ? city : "Chennai"}'/>" required class="form-control" placeholder="e.g. Chennai">
+                        <input type="text" id="city" name="city" value="${fn:escapeXml(city != null ? city : 'Chennai')}" required class="form-control" placeholder="e.g. Chennai">
                     </div>
 
                     <div class="form-group">
                         <label class="form-label" for="pincode">Postal Pincode</label>
-                        <input type="text" id="pincode" name="pincode" value="<c:out value='${pincode != null ? pincode : "600001"}'/>" required class="form-control" placeholder="e.g. 600001">
+                        <input type="text" id="pincode" name="pincode" value="${fn:escapeXml(pincode != null ? pincode : '600001')}" required class="form-control" placeholder="e.g. 600001">
                     </div>
                 </div>
 

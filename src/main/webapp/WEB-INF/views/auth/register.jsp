@@ -1,3 +1,6 @@
+<%@ page contentType="text/html;charset=UTF-8" language="java" isELIgnored="false" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="pageTitle" value="Create Account — ShopEase" scope="request"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp"/>
 
@@ -13,12 +16,12 @@
         <form action="${pageContext.request.contextPath}/register" method="post">
             <div class="form-group">
                 <label class="form-label" for="name">Full Name</label>
-                <input type="text" id="name" name="name" value="<c:out value='${name}'/>" required class="form-control" placeholder="e.g. Priya Sharma">
+                <input type="text" id="name" name="name" value="${fn:escapeXml(name)}" required class="form-control" placeholder="e.g. Priya Sharma">
             </div>
 
             <div class="form-group">
                 <label class="form-label" for="email">Email Address</label>
-                <input type="email" id="email" name="email" value="<c:out value='${email}'/>" required class="form-control" placeholder="priya@example.com">
+                <input type="email" id="email" name="email" value="${fn:escapeXml(email)}" required class="form-control" placeholder="priya@example.com">
             </div>
 
             <div class="form-group">

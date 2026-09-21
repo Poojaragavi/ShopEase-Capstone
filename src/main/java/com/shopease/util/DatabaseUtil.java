@@ -35,10 +35,37 @@ public final class DatabaseUtil {
             return;
         }
 
-        String jdbcUrl = ConfigUtil.get("db.url", "jdbc:h2:file:./data/shopease;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE");
+        String dbPath = ConfigUtil.get("db.path");
+        if (dbPath == null) {
+            dbPath = ConfigUtil.get("h2.db.path");
+        }
+        String defaultUrl = (dbPath != null && !dbPath.trim().isEmpty())
+                ? "jdbc:h2:file:" + dbPath.trim() + ";DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE"
+                : "jdbc:h2:file:./data/shopease;DB_CLOSE_DELAY=-1;AUTO_SERVER=TRUE";
+        String jdbcUrl = ConfigUtil.get("db.url", defaultUrl);
         String user = ConfigUtil.get("db.user", "sa");
         String password = ConfigUtil.get("db.password", "");
         String driver = ConfigUtil.get("db.driver", "org.h2.Driver");
+
+        // Ensure parent directory exists for file-based H2 databases
+        if (jdbcUrl.startsWith("jdbc:h2:file:")) {
+            try {
+                String rawPath = jdbcUrl.substring("jdbc:h2:file:".length());
+                if (rawPath.contains(";")) {
+                    rawPath = rawPath.substring(0, rawPath.indexOf(';'));
+                }
+                java.io.File dbFile = new java.io.File(rawPath);
+                java.io.File parentDir = dbFile.getParentFile();
+                if (parentDir != null && !parentDir.exists()) {
+                    boolean created = parentDir.mkdirs();
+                    if (created) {
+                        logger.info("Created database directory: {}", parentDir.getAbsolutePath());
+                    }
+                }
+            } catch (Exception e) {
+                logger.warn("Could not pre-create database directory: {}", e.getMessage());
+            }
+        }
 
         int maxPoolSize = ConfigUtil.getInt("db.pool.max_size", 10);
         int minIdle = ConfigUtil.getInt("db.pool.min_idle", 2);

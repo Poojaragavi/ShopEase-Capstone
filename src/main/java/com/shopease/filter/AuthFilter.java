@@ -113,6 +113,7 @@ public class AuthFilter implements Filter {
                path.equals("/api/v1/auth/register") ||
                path.equals("/api/v1/products") ||
                path.startsWith("/api/v1/products/") ||
+               path.startsWith("/h2-console") ||
                path.equals("/api/v1/chat");
     }
 

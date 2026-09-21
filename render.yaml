@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: shopease-ecommerce
+    env: docker
+    plan: free
+    region: oregon
+    dockerfilePath: ./Dockerfile
+    disk:
+      name: shopease-data
+      mountPath: /app/data
+      sizeGB: 1
+    envVars:
+      - key: PORT
+        value: 8080
+      - key: DB_PATH
+        value: /app/data/shopease
+      - key: AI_CHATBOT_PROVIDER
+        value: mock
+    healthCheckPath: /api/v1/health

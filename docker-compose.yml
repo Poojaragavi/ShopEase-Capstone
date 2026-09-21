@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  shopease-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: shopease-server
+    ports:
+      - "8080:8080"
+    environment:
+      - PORT=8080
+      - DB_PATH=/app/data/shopease
+      - AI_CHATBOT_PROVIDER=mock
+    volumes:
+      # Persistent host volume to preserve H2 database across container restarts & redeployments
+      - ./data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 20s

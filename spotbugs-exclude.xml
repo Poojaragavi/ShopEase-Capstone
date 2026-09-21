@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<FindBugsFilter>
+    <!-- Exclude generated classes if any -->
+    <Match>
+        <Package name="~.*\.generated.*" />
+    </Match>
+    <!-- Allow standard servlet parameter passing and representations -->
+    <Match>
+        <Bug pattern="EI_EXPOSE_REP,EI_EXPOSE_REP2,MS_EXPOSE_REP,SE_BAD_FIELD,HRS_REQUEST_PARAMETER_TO_HTTP_HEADER,REC_CATCH_EXCEPTION" />
+    </Match>
+</FindBugsFilter>

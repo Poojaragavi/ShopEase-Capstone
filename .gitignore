@@ -1,0 +1,30 @@
+# Maven
+target/
+*.war
+*.jar
+*.class
+
+# Logs & Temp
+logs/
+*.log
+tomcat.*/
+work/
+
+# H2 Database files
+data/
+*.mv.db
+*.trace.db
+
+# IDE & OS files
+.idea/
+*.iml
+.vscode/
+.settings/
+.project
+.classpath
+.DS_Store
+Thumbs.db
+
+# Environment & Secrets
+.env
+local.properties

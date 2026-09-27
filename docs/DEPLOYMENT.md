@@ -85,7 +85,7 @@ The `./data` folder on your host machine will hold the persistent database file 
 ### 3. Deploying on Heroku / Fly.io / AWS Elastic Beanstalk
 - **Procfile** is included in the project root:
   ```
-  web: java -cp "target/classes;target/shopease/WEB-INF/lib/*" com.shopease.TomcatServer
+  web: catalina.sh run
   ```
 - Configure environment variable `PORT` and `DB_PATH`.
 
